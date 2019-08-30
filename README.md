@@ -50,4 +50,9 @@ docker run -p 8080:8080 -e 'JENKINS_HOME=C:\JENKINS_HOME\Jenkins' -it jenkins_wi
 mkdir c:\temp\jenkinsmastervolume -Force
 docker run -p 8080:8080 -e 'JENKINS_HOME=C:\JENKINS_HOME\Jenkins' -v=c:/Temp/jenkinsmastervolume:C:/JENKINS_HOME/Jenkins -it jenkins_windows_master:latest
 
+# You can use the compose file
+mkdir c:\temp\jenkinsmastervolume -Force
+mkdir c:\temp\jenkinsslavevolume -Force
+mkdir C:\Temp\jenkinsmastervolume\war\WEB-INF\lib -Force
+docker-compose up --build
 ```

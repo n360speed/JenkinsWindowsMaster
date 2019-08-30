@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  jenkins_windows_master:
+    build: .
+    container_name: jenkins_windows_master
+    environment:
+      - JENKINS_HOME=C:\JENKINS_HOME\Jenkins
+    volumes:
+      - C:\Temp\jenkinsmastervolume:C:\JENKINS_HOME\Jenkins
+      - type: bind
+        source: C:\Temp\jenkinsmastervolume\war\WEB-INF\lib
+        target: C:\JENKINS_HOME\Jenkins\war\WEB-INF\lib
+        consistency: consistent
+    ports:
+      - "8080:8080"
+  jenkins_windows_slave:
+    build:
+      context: .
+      dockerfile: Dockerfile-slave
+    container_name: jenkins_windows_slave
+    volumes:
+      - type: bind
+        source: C:\Temp\jenkinsmastervolume\war\WEB-INF\lib
+      # "C:\Temp\jenkinsmastervolume\war\WEB-INF\lib\remoting-3.29.jar"
+        target: C:/master_jars
+        read_only: true
+        consistency: consistent
+      - C:\Temp\jenkinsslavevolume:C:\JENKINS_HOME\Jenkins

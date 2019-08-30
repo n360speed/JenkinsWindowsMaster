@@ -15,7 +15,7 @@ VOLUME ${JENKINS_HOME}
 
 CMD powershell -ExecutionPolicy Bypass -Command Import-Module C:\jenkins\InstallJenkins.psm1;  \
     InstallJenkins -JENKINS_HOME:${JENKINS_HOME} \
-    && powershell
+    && powershell -Command Get-Content  "${env:JENKINS_HOME}\jenkins.out.log" -Tail 100 -Wait
 
 EXPOSE 8080
 

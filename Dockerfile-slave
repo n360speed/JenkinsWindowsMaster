@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/powershell:latest
+
+ENV JENKINS_HOME='C:\Program Files (x86)\Jenkins'
+
+WORKDIR /jenkins
+
+RUN mkdir C:\Temp
+
+VOLUME ${JENKINS_HOME}
+
+#CMD powershell -ExecutionPolicy Bypass -Command Import-Module C:\jenkins\InstallJenkins.psm1;  \
+#    InstallJenkins -JENKINS_HOME:${JENKINS_HOME} \
+#    && powershell -Command Get-Content  "${env:JENKINS_HOME}\jenkins.out.log" -Tail 100 -Wait
+
+CMD powershell -Command Get-Content  "README.md" -Tail 100 -Wait
+
+EXPOSE 8080
+
+COPY . /jenkins
